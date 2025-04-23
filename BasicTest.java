@@ -1,5 +1,5 @@
 public class BasicTest {
     public static void main(String[] args) {
-        System.out.println("LoveCrafy Cat");
+        System.out.println("kevin is gayyayayayaya");
     }
 }
