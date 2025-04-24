@@ -1,13 +1,18 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class BasicTest {
     public static void main(String[] args) throws FileNotFoundException {
         String text = FileReader.getString("W:\\Students\\Per2\\26 Cole S\\CompleteShakespere.txt");
-        ArrayList<String> chars = new ArrayList<>();
         ArrayList<Integer> values = new ArrayList<>();
-        for (char c : text.toCharArray()) {
-            if (false) c = 'a';
+        Scanner KEYBOARD = new Scanner(System.in);
+        System.out.println("Length:");
+        int numLetters = KEYBOARD.nextInt();
+        String output = "";
+        for (int i = 0; i < numLetters; i++) {
+            output += text.charAt((int)(Math.random() * text.length()));
         }
+        System.out.print(output);
     }
 }
