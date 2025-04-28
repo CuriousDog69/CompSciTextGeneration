@@ -17,8 +17,11 @@ public class NthGen {
     }
 
     public String getRandomFromString(String key) {
+
         ArrayList<String> choices = new ArrayList<>();
+
         int index = text.indexOf(key);
+
         while (index != -1 && index < text.length() - keyLength) {
             if (index + keyLength < text.length()) {
                 choices.add(text.substring(index + keyLength, index + keyLength + 1));
@@ -44,8 +47,11 @@ public class NthGen {
 
     public String run(int length) {
         String output = getKey();
+
         String key = output;
+
         System.out.println(key);
+
         while (output.length() < length) {
             if (cache.containsKey(key)) {
                 output += cache.get(key)[(int) (cache.get(key).length * Math.random())];
@@ -66,9 +72,13 @@ public class NthGen {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        NthGen fg = new NthGen(25);
-        fg.setText(FileReader.getString("C:\\Users\\xxjbr\\IdeaProjects\\CompSciTextGeneration\\bible.txt"));
-        String output = fg.run(5000);
+        NthGen fg = new NthGen(20);
+
+        FileReader coleDir = new FileReader();
+
+        fg.setText(coleDir.getString("longStory.txt"));
+
+        String output = fg.run(10000);
         //System.out.println("\n\n\n" + output);
         copyToClipboard(output);
 

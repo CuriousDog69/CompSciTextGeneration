@@ -49,7 +49,9 @@ public class FirstGen {
 
     public static void main(String[] args) throws FileNotFoundException {
         FirstGen fg = new FirstGen();
-        fg.setText(FileReader.getString("C:\\Users\\xxjbr\\IdeaProjects\\CompSciTextGeneration\\manifesto.txt"));
+        FileReader coleDir = new FileReader();
+
+        fg.setText(coleDir.getString("manifesto.txt"));
         fg.run(10);
     }
 }
