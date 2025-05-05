@@ -4,6 +4,7 @@ import java.awt.datatransfer.StringSelection;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 public class NthGen {
@@ -17,11 +18,8 @@ public class NthGen {
     }
 
     public String getRandomFromString(String key) {
-
         ArrayList<String> choices = new ArrayList<>();
-
         int index = text.indexOf(key);
-
         while (index != -1 && index < text.length() - keyLength) {
             if (index + keyLength < text.length()) {
                 choices.add(text.substring(index + keyLength, index + keyLength + 1));
@@ -47,11 +45,8 @@ public class NthGen {
 
     public String run(int length) {
         String output = getKey();
-
         String key = output;
-
-        System.out.println(key);
-
+        System.out.println("Key: \""+key+"\"");
         while (output.length() < length) {
             if (cache.containsKey(key)) {
                 output += cache.get(key)[(int) (cache.get(key).length * Math.random())];
@@ -72,13 +67,35 @@ public class NthGen {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        NthGen fg = new NthGen(20);
+        Scanner s = new Scanner(System.in);
+        System.out.print("Choose your analysis level from 1-10: ");
+        int level = s.nextInt();
+        NthGen fg = new NthGen(level);
+        System.out.print("Choose your output length in characters: ");
+        int length = s.nextInt();
+        System.out.println("1): Bible, 2): A Christmas Carol 3): The Odyssey 4): Paradise Lost 5): The Works of William Shakespeare");
+        System.out.println("For a random choice of the five above, enter 0.");
+        System.out.print("Choose your input: ");
+        int input = s.nextInt();
+        String[] strings = {"Bible.txt", "ChristmasCarol.txt", "Odyssey.txt", "ParadiseLost.txt", "Shakespeare.txt"};
+        if ((input>0)&&(input<6)) {
+            fg.setText(FileReader.getString(strings[input-1]));
+            System.out.println("You have chosen to read from "+strings[input-1]);
+        }
+        else if (input == 0) {
+            input = (int) (Math.random()*5);
+            fg.setText(FileReader.getString(strings[input]));
+            System.out.println("You have chosen to read from "+strings[input]);
+        }
+        else {
+            System.out.println("Invalid entry type: "+input+" not in the desired range");
+        }
 
-        FileReader coleDir = new FileReader();
 
-        fg.setText(coleDir.getString("longStory.txt"));
 
-        String output = fg.run(10000);
+
+        String output = fg.run(length);
+        System.out.println("Output: \""+output+"\"");
         //System.out.println("\n\n\n" + output);
         copyToClipboard(output);
 
